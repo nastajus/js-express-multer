@@ -1,7 +1,7 @@
 exports.up = function (knex, Promise) {
 	return knex.schema.hasTable('employees').then(function (exists) {
 		if (!exists) {
-			console.log('table `employees` didn\'t exist');
+			console.log('table `employees` didn\'t exist, creating.');
 
 			return knex.schema.createTable('employees', function (table) {
 				table.increments();
@@ -14,7 +14,7 @@ exports.up = function (knex, Promise) {
 	}).then(function () {
 		knex.schema.hasTable('expenses').then(function (exists) {
 			if (!exists) {
-				console.log('table `expenses` didn\'t exist');
+				console.log('table `expenses` didn\'t exist, creating.');
 
 				return knex.schema.createTable('expenses', function (table) {
 					table.increments();
@@ -30,7 +30,6 @@ exports.up = function (knex, Promise) {
 					table.timestamp('created_at').defaultTo(knex.fn.now());
 					table.timestamp('updated_at').defaultTo(knex.fn.now());
 				})
-
 			}
 		})
 	});
